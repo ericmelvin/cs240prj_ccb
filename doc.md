@@ -7,7 +7,7 @@
 
 
 ## Project Description
-Build an application to compare the implementation of binary search trees and red hat trees.
+Build an application to compare the implementation of binary search trees and red black trees.
 
 
 
