@@ -56,13 +56,13 @@ void outputTable(std::vector<std::vector<double>> timingData, std::vector<std::s
         outputDivider(colLabels.size()*17);
     }
 }
-// Ouput column headers
-void outputColLabels(std::vector<std::string> header) {
-    for (int i=0; i<header.size(); i++) {
-        std::cout << std::left <<"| " << std::setw(15) << header[i];
+// Ouput column labels
+void outputColLabels(std::vector<std::string> colLabels) {
+    for (int i=0; i<colLabels.size(); i++) {
+        std::cout << std::left <<"| " << std::setw(15) << colLabels[i];
     }
     std::cout << std::endl;
-    outputDivider(header.size()*17);
+    outputDivider(colLabels.size()*17);
 
 }
 
