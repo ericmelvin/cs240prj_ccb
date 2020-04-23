@@ -22,17 +22,25 @@ n = seconds to run function
 ### BST Methods
 
 #### insert
+- Input: int value to insert
+- Output: none
 #### findMin
+- Input: none
+- Output: integer min_value
 #### findMax
+- Input: none
+- Output: integer max_value
 #### findK
+- Input: an arbitrary value k to search for
+- Ouput: boolean found_k
 
 ### RBT Methods
 
 #### insert
-- Inputs: int value to insert
+- Input: int value to insert
 - Output: none
 #### findMin
-- Inputs: none
+- Input: none
 - Output: integer min_value
 #### findMax
 - Input: none
@@ -52,3 +60,9 @@ n = seconds to run function
 #### getCurrentTime
 - Input: none
 - Output: number of milliseconds since epoch time
+#### Generate input numbers
+- Input: integer n: number of ints to generate
+- Output: An array or file containing ints
+#### Parse command line args
+- Input: argv
+- Output: Control flow
