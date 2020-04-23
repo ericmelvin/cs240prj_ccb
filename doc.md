@@ -60,6 +60,7 @@ n = seconds to run function
 
 
 ## Other Methods
+### File: io.hh
 #### inputFile
 - Input: file of integers
 - Output: None
@@ -69,9 +70,10 @@ n = seconds to run function
 #### getCurrentTime
 - Input: none
 - Output: number of milliseconds since epoch time
-#### Generate input numbers
-- Input: integer n: number of ints to generate
-- Output: An array or file containing ints
+#### genInputNumbers
+- Generate a vector of random numbers for input to data structures
+- Input length: length of vector
+- Input max: maximum value in vector
 #### Parse command line args
 - Input: argv
 - Output: Control flow
