@@ -17,5 +17,11 @@ n = seconds to run function
 |RBT| n | n | n | n |
 
 
+## Classes
 
+### BST
+### RBT
 
+## Methods
+### inputFile
+### outputTable
