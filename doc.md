@@ -60,12 +60,22 @@ n = seconds to run function
 
 
 ## Other Methods
+### File: io.cc
+
 #### inputFile
 - Input: file of integers
 - Output: None
 #### outputTable
-- Input: Timing data
+- Input: Timing data as a 2D array
+- Input: column labels 
+- Input: row labels
 - Output: Table formatted with timing data
+- std::vector<int> genInputNumbers(int length, int max);
+  - ##### Helper functions
+  - void outputColLabels(std::vector<std::string> colLabels);
+  - void outputDivider(int size);
+  - void outputRowLabel(std::string label);
+  - void outputData(double data, int p);
 #### getCurrentTime
 - Input: none
 - Output: number of milliseconds since epoch time
