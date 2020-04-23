@@ -19,9 +19,36 @@ n = seconds to run function
 
 ## Classes
 
-### BST
-### RBT
+### BST Methods
 
-## Methods
-### inputFile
-### outputTable
+#### insert
+#### findMin
+#### findMax
+#### findK
+
+### RBT Methods
+
+#### insert
+- Inputs: int value to insert
+- Output: none
+#### findMin
+- Inputs: none
+- Output: integer min_value
+#### findMax
+- Input: none
+- Output: integer max_value
+#### findK
+- Input: an arbitrary value k to search for
+- Ouput: boolean found_k
+
+
+## Other Methods
+#### inputFile
+- Input: file of integers
+- Output: None
+#### outputTable
+- Input: Timing data
+- Output: Table formatted with timing data
+#### getCurrentTime
+- Input: none
+- Output: number of milliseconds since epoch time
