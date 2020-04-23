@@ -1,19 +1,21 @@
 #include "redBlackTree.h"
 
 //-------------------------------------------------------------------------------------------------
-void redBlackTree::Insert(node* newNode)
+void redBlackTree::Insert(node* n)
 {
-	node* currentNode = root;
-	bool found = false;;
+	node* curr = root;
 
 	if (root == NULL)
 	{
-		root = newNode;
+		root = n;
 	}
 	else
 	{
 
 	}
+
+
+	root.color = b;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -135,15 +137,14 @@ void redBlackTree::Delete(node* currentPtr, node* parentPtr)
 void redBlackTree::CreateTree(void)
 {
 	root = NULL;
-	isAlpha = true;
 }
 
 //-------------------------------------------------------------------------------------------------
-node* redBlackTree::CreatNode(char clr, int dta)
+node* redBlackTree::CreatNode(int dta)
 {
 	node* aNode = new node;
 
-	aNode->color = clr;
+	aNode->color = red;
 	aNode->data = dta;
 
 	aNode->left = NULL;

@@ -1,5 +1,5 @@
-#ifndef redBlackTree_h
-#define redBlackTree_h
+#ifndef REDBLACKTREE_HH
+#define REDBLACKTREE_HH
 
 //Define node struct
 struct node
@@ -16,7 +16,7 @@ class RBTree
 private:
 	node* root;
 
-	void Insert(node* newNode);
+	void Insert(node* n);
 
 	void RightRotate();
 
@@ -45,11 +45,9 @@ public:
 
 	void BuildTree();
 
-	void Inorder();
+	void FindMax();
 
-	void Preorder();
-
-	void Postorder();
+	void FindMin();
 
 	void Search();
 
@@ -60,3 +58,5 @@ public:
 	//Destructor
 	~redBlackTree() { DestroyTree(); };
 };
+
+#endif //!REDBLACKTREE_HH
