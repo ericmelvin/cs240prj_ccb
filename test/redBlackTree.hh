@@ -1,6 +1,10 @@
 #ifndef REDBLACKTREE_HH
 #define REDBLACKTREE_HH
 
+#include <iostream>
+#include <algorithm>
+
+
 //Define node struct
 struct node
 {
@@ -26,9 +30,9 @@ private:
 
 	node * BSTInsert(node *root, node *n);
 
-	void RightRotate();
+	void RightRotate(node *n);
 
-	void LeftRotate();
+	void LeftRotate(node *n);
 
 	void DeleteLeafNode(node* currentPtr, node* parentPtr);
 

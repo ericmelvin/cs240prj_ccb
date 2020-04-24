@@ -36,12 +36,57 @@ void redBlackTree::Insert(int data)
 	Rebalance(root, n);
 }
 
-void RBTree::Rebalance(node *root, node* n){
-	node *temp_parent = nullptr;
-	node *temp_grandparent = nullptr;
-	while((n != root) && (n->color != 'b') && (n->parent->color == 'r')){
-	
-	}
+void RBTree::Rebalance(node* n){
+	node *parent = nullptr;
+	node *grandparent = nullptr;
+	while((n != root) && (n->color != 'r') && (n->parent->color == 'r')){
+		parent = n->parent;
+		grandparent = n->parent->parent;
+		if(parent == grandparent->left){
+			Node *uncle = grandparent->right;
+			/* Recoloring 
+			 * parent is a red node and is a left child
+			 * uncle is red and is a right child
+			 * grandparent is black by property of RBT
+			 * */
+			if(uncle->color == 'r'){
+				uncle->color = 'b';
+				parent->color = 'b';
+				grandparent->color = 'r';
+				n = grandparent;
+			}else{
+				if(n == parent->right){
+					LeftRotate(parent);
+					n = parent;
+					parent = n->parent;
+					// rebalancing
+				}
+				RightRotate(grandparent);
+				std::swap(parent->color, grandparent->color);
+				n = parent;
+				
+			}
+		}else{
+			//Similar to above cases except parent is a right child
+			Node *uncle = grandparent->left;
+			if(uncle->color == 'r'){
+				uncle->color = 'b';
+				parent->color = 'b';
+				grandparent->color = 'r';
+				n = grandparent;
+			}else{
+				if(n == parent->left){
+					RightRotate(parent);
+					n = parent;
+					parent = n->parent;
+				}
+				LeftRotate(grandparent);
+				std::swap(parent->color, grandparent->color);
+				n = parent;
+			}
+		}
+	}//end while
+	root->color = 'b';
 
 }
 
