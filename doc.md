@@ -100,4 +100,4 @@ n = seconds to run function
 
 
 ## References:
-1. https://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/?ref=rp 
+1. https://algorithmtutor.com/Data-Structures/Tree/Red-Black-Trees/ (for implementation)
