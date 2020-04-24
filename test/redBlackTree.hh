@@ -9,6 +9,10 @@ struct node
 	node* parent;
 	node* left;
 	node* right;
+	/* constructor for node, default color RED */
+	Node(int num)
+		:data(num), color('r'), parent(nullptr), left(nullptr), child(nullptr)
+		{}
 };
 
 class RBTree
@@ -16,7 +20,11 @@ class RBTree
 private:
 	node* root;
 
-	void Insert(node* n);
+	//void Insert(int data);
+	/* Rebalance the tree whenever we insert a new node n */
+	void Rebalance(node *root, node *n);
+
+	node * BSTInsert(node *root, node *n);
 
 	void RightRotate();
 
@@ -36,6 +44,8 @@ public:
 	treeClassType() { CreateTree(); };
 
 	void CreateTree(void);
+
+	void Insert(node *root, int data);
 
 	bool IsEmpty(void) { return root == NULL; };
 

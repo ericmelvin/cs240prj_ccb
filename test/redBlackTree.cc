@@ -1,21 +1,48 @@
-#include "redBlackTree.h"
+#include "redBlackTree.hh"
+
+
+node* RBTree::BSTInsert(node *root, node* n){
+	if(root == nullptr) return n;
+	if(n->data < root->data){
+		root->left = BSTInsert(root->left, n);
+		root->left->parent = root;
+	}else if(n->data > root->data){
+		root->right = BSTInsert(root->right, n);
+		root->right->parent = root;
+	}
+	/* set parent pointer of inserted node and return original root node */
+	return root;
+}
 
 //-------------------------------------------------------------------------------------------------
-void redBlackTree::Insert(node* n)
+
+/* Insert an integer into a tree 
+ *	Use the data to create a node
+ *	All nodes must be inserted with the color red and changed 
+ *	accordingly to maintain balance
+ * */
+
+
+
+void redBlackTree::Insert(int data)
 {
-	node* curr = root;
+	node* n = new Node(data);
+	/* Regular BST insertion */
+	root = BSTInsert(root, n);
+	
+	/* rebalance the tree with the node we just inserted 
+	 * Root node should always be black	
+	 * */
+	Rebalance(root, n);
+}
 
-	if (root == NULL)
-	{
-		root = n;
+void RBTree::Rebalance(node *root, node* n){
+	node *temp_parent = nullptr;
+	node *temp_grandparent = nullptr;
+	while((n != root) && (n->color != 'b') && (n->parent->color == 'r')){
+	
 	}
-	else
-	{
 
-	}
-
-
-	root.color = b;
 }
 
 //-------------------------------------------------------------------------------------------------
