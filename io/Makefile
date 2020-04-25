@@ -9,7 +9,7 @@ TARGET = io
 all:			$(TARGET)
 
 $(TARGET):		$(O_FILES)
-				$(CXX) $(O_FILES) -o $@
+				$(CXX) $(CXX_FLAGS) $(O_FILES) -o $@
 
 .phony:			clean
 clean:
@@ -20,3 +20,4 @@ clean:
 
 #dependencies
 io.o:	io.cc io.hh
+

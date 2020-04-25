@@ -3,10 +3,10 @@
 #include <iostream>
 #include <vector>
 #include "io.hh"
-
-
+#include "graph.hh"
 // Main for testing only
 int main() {
+
     // Testing for generate input numbers
     std::vector<int> v = genInputNumbers(100, 100000);
     for (int i=0; i<v.size(); i++) {
