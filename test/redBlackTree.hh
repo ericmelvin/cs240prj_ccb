@@ -4,7 +4,6 @@
 #include <iostream>
 #include <algorithm>
 
-
 //Define node struct
 struct node
 {
