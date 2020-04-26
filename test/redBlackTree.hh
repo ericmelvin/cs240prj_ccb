@@ -16,6 +16,44 @@ struct node
 	Node(int num)
 		:data(num), color('r'), parent(nullptr), left(nullptr), child(nullptr)
 		{}
+
+	bool leftChild(){ 
+		return this == parent->left;
+	}
+	bool rightChild(){
+		return this == parent->right;
+	}
+	
+	node *uncle(){
+		if(parent == nullptr || parent->parent == nullptr){
+			return nullptr;
+		}
+		if(parent->leftChild()){
+			return parent->parent->right;
+		}else if(parent->rightChild()){
+			return parent->parent->left;
+		}
+	}
+
+	node *sibling(){
+		if(parent == nullptr) return nullptr;
+		if(leftChild) return parent->right;
+		if(rightChild) return parent->left;
+	}
+
+	void siftDown(node *nparent){
+		if(parent != nullptr){
+			if(leftChild()){
+				parent->left = nparent;
+			}else{
+				parent->right = nparent;
+			}
+		}
+		nparent->parent = parent;
+		parent = nparent;
+	}
+
+
 };
 
 class RBTree

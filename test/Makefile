@@ -4,9 +4,13 @@ CXX = g++
 CXX_FILES = $(wildcard *.cc)
 OFILES = $(CXX_FILES::cc=o)
 
-all:	main
+all:	rbt
 
 main:	$(OFILES)
 	$(CXX) $(OFILES) -o main
 
-clean: rm -rf *.o *~ main
+rbt:	RBT.hh main.cc
+	$(CXX) RBT.hh main.cc -o rbt
+
+clean: 
+	rm -rf *.o *~ main rbt

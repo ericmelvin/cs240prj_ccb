@@ -24,7 +24,7 @@ node* RBTree::BSTInsert(node *root, node* n){
 
 
 
-void redBlackTree::Insert(int data)
+void RBTree::Insert(int data)
 {
 	node* n = new Node(data);
 	/* Regular BST insertion */
