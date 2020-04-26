@@ -1,6 +1,6 @@
 #include <iostream>
 #include <queue>
-using namespace std;
+//using namespace std;
 
 enum COLOR { RED, BLACK };
 
@@ -11,25 +11,30 @@ public:
     Node *left, *right, *parent;
 
     Node(int val) : val(val) {
-        parent = left = right = NULL;
+        parent = left = right = nullptr;
         
         // Node is created during insertion
         // Node is red at insertion
         color = RED;
     }
+	
+
+    void printNode(){
+    	std::cout << "Value: " << this->val << " Color: " << this->color << " Parent: " << 
+		&parent << " Left Child: " << &left << " Right Child: " << &right << std::endl;
+    }
 
     // returns pointer to uncle
     Node *uncle() {
         // If no parent or grandparent, then no uncle
-        if (parent == NULL or parent->parent == NULL)
-        return NULL;
+        if (parent == nullptr || parent->parent == nullptr)
+        return nullptr;
 
-        if (parent->isOnLeft())
-        // uncle on right
-        return parent->parent->right;
-        else
-        // uncle on left
-        return parent->parent->left;
+        if (parent->isOnLeft()){
+		return parent->parent->right;
+	} else{
+		return parent->parent->left;
+	}
     }
 
     // check if node is left child of parent
@@ -38,18 +43,17 @@ public:
     // returns pointer to sibling
     Node *sibling() {
         // sibling null if no parent
-        if (parent == NULL)
-        return NULL;
+        if (parent == nullptr)
+        return nullptr;
 
-        if (isOnLeft())
-        return parent->right;
+        if (isOnLeft()) return parent->right;
 
         return parent->left;
     }
 
     // moves node down and moves given node in its place
     void moveDown(Node *nParent) {
-        if (parent != NULL) {
+        if (parent != nullptr) {
             if (isOnLeft()) {
                 parent->left = nParent;
             } else {
@@ -61,8 +65,8 @@ public:
     }
 
     bool hasRedChild() {
-        return (left != NULL and left->color == RED) or
-        (right != NULL and right->color == RED);
+        return (left != nullptr && left->color == RED) ||
+        (right != nullptr && right->color == RED);
     }
 };
 
@@ -84,7 +88,7 @@ class RBTree {
         x->right = nParent->left;
         // connect new parent's left element with node
         // if it is not null
-        if (nParent->left != NULL)
+        if (nParent->left != nullptr)
         nParent->left->parent = x;
 
         // connect new parent with x
@@ -105,7 +109,7 @@ class RBTree {
         x->left = nParent->right;
         // connect new parent's right element with node
         // if it is not null
-        if (nParent->right != NULL)
+        if (nParent->right != nullptr)
         nParent->right->parent = x;
 
         // connect new parent with x
@@ -139,7 +143,7 @@ class RBTree {
         *uncle = x->uncle();
 
         if (parent->color != BLACK) {
-            if (uncle != NULL && uncle->color == RED) {
+            if (uncle != nullptr && uncle->color == RED) {
                 // uncle red, perform recoloring and recurse
                 parent->color = BLACK;
                 uncle->color = BLACK;
@@ -178,7 +182,7 @@ class RBTree {
     Node *successor(Node *x) {
         Node *temp = x;
 
-        while (temp->left != NULL)
+        while (temp->left != nullptr)
         temp = temp->left;
 
         return temp;
@@ -187,18 +191,19 @@ class RBTree {
     // find node that replaces a deleted node in BST
     Node *BSTreplace(Node *x) {
         // when node have 2 children
-        if (x->left != NULL and x->right != NULL)
+        if (x->left != nullptr && x->right != nullptr)
         return successor(x->right);
 
         // when leaf
-        if (x->left == NULL and x->right == NULL)
-        return NULL;
+        if (x->left == nullptr && x->right == nullptr)
+        return nullptr;
 
         // when single child
-        if (x->left != NULL)
-        return x->left;
-        else
-        return x->right;
+        if (x->left != nullptr){
+        	return x->left;
+	}else{
+        	return x->right;
+	}
     }
 
     // deletes the given node
@@ -206,14 +211,14 @@ class RBTree {
         Node *u = BSTreplace(v);
 
         // True when u and v are both black
-        bool uvBlack = ((u == NULL or u->color == BLACK) and (v->color == BLACK));
+        bool uvBlack = ((u == nullptr || u->color == BLACK) && (v->color == BLACK));
         Node *parent = v->parent;
 
-        if (u == NULL) {
+        if (u == nullptr) {
             // u is NULL therefore v is leaf
             if (v == root) {
                 // v is root, making root null
-                root = NULL;
+                root = nullptr;
             } else {
                 if (uvBlack) {
                     // u and v both black
@@ -221,8 +226,8 @@ class RBTree {
                     fixDoubleBlack(v);
                 } else {
                     // u or v is red
-                    if (v->sibling() != NULL)
-                    // sibling is not null, make it red"
+                    if (v->sibling() != nullptr)
+                    // sibling is not null, make it red
                     v->sibling()->color = RED;
                 }
 
@@ -237,12 +242,12 @@ class RBTree {
             return;
         }
 
-        if (v->left == NULL or v->right == NULL) {
+        if (v->left == nullptr || v->right == nullptr) {
             // v has 1 child
             if (v == root) {
                 // v is root, assign the value of u to v, and delete u
                 v->val = u->val;
-                v->left = v->right = NULL;
+                v->left = v->right = nullptr;
                 delete u;
             } else {
                 // Detach v from tree and move u up
@@ -275,7 +280,7 @@ class RBTree {
         return;
 
         Node *sibling = x->sibling(), *parent = x->parent;
-        if (sibling == NULL) {
+        if (sibling == nullptr) {
             // No sibiling, double black pushed up
             fixDoubleBlack(parent);
         } else {
@@ -295,7 +300,7 @@ class RBTree {
                 // Sibling black
                 if (sibling->hasRedChild()) {
                     // at least 1 red children
-                    if (sibling->left != NULL and sibling->left->color == RED) {
+                    if (sibling->left != nullptr && sibling->left->color == RED) {
                         if (sibling->isOnLeft()) {
                             // left left
                             sibling->left->color = sibling->color;
@@ -340,7 +345,7 @@ class RBTree {
         return;
 
         // queue for level order
-        queue<Node *> q;
+	std::queue<Node *> q;
         Node *curr;
 
         // push x
@@ -353,7 +358,7 @@ class RBTree {
             q.pop();
 
             // print node value
-            cout << curr->val << " ";
+	    std::cout << curr->val << " ";
 
             // push children to queue
             if (curr->left != NULL)
@@ -368,7 +373,7 @@ class RBTree {
         if (x == NULL)
         return;
         inorder(x->left);
-        cout << x->val << " ";
+	std::cout << x->val << " ";
         inorder(x->right);
     }
 
@@ -444,8 +449,8 @@ public:
         Node *v = search(n);
 
         if (v->val != n) {
-            cout << "No node found to delete with value:" << n << endl;
-            return;
+		std::cout << "No node found to delete with value:" << n << std::endl;
+		return;
         }
 
         deleteNode(v);
@@ -453,54 +458,21 @@ public:
 
     // prints inorder of the tree
     void printInOrder() {
-        cout << "Inorder: " << endl;
+	std::cout << "Inorder: " << std::endl;
         if (root == NULL)
-        cout << "Tree is empty" << endl;
+        std::cout << "Tree is empty" << std::endl;
         else
         inorder(root);
-        cout << endl;
+	std::cout << std::endl;
     }
 
     // prints level order of the tree
     void printLevelOrder() {
-        cout << "Level order: " << endl;
+	    std::cout << "Level order: " << std::endl;
         if (root == NULL)
-        cout << "Tree is empty" << endl;
+        std::cout << "Tree is empty" << std::endl;
         else
         levelOrder(root);
-        cout << endl;
+	std::cout << std::endl;
     }
 };
-/*
-int main() {
-    RBTree tree;
-
-    tree.insert(7);
-    tree.insert(3);
-    tree.insert(18);
-    tree.insert(10);
-    tree.insert(22);
-    tree.insert(8);
-    tree.insert(11);
-    tree.insert(26);
-    tree.insert(2);
-    tree.insert(6);
-    tree.insert(13);
-
-    tree.printInOrder();
-    tree.printLevelOrder();
-
-    cout<<endl<<"Deleting 18, 11, 3, 10, 22"<<endl;
-
-    tree.deleteByVal(18);
-    tree.deleteByVal(11);
-    tree.deleteByVal(3);
-    tree.deleteByVal(10);
-    tree.deleteByVal(22);
-
-    tree.printInOrder();
-    tree.printLevelOrder();
-    return 0;
-}
-
-*/
