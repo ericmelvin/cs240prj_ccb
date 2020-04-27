@@ -34,8 +34,3 @@ void makeGraph() {
     
 }
 
-int main() {
-    // Compile with: g++ graph.cc -I/usr/include/python2.7 -lpython2.7 -o g
-    makeGraph();
-    return 0;
-}

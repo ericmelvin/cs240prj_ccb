@@ -1,23 +1,10 @@
-CXX = g++
+all: 		io
 
-CXX_FLAGS = -g -Wall -std=c++17
+io:			io.o graph.o
+			g++ io.o graph.o -I/usr/include/python2.7 -lpython2.7 -o i
 
-O_FILES = io.o
+graph.o:	graph.cc graph.hh
+			g++ -c graph.cc -I/usr/include/python2.7 -lpython2.7
 
-TARGET = io
-
-all:			$(TARGET)
-
-$(TARGET):		$(O_FILES)
-				$(CXX) $(CXX_FLAGS) $(O_FILES) -o $@
-
-.phony:			clean
-clean:
-				rm -f *~ *.o $(TARGET)
-
-#dependencies
-#none
-
-#dependencies
 io.o:	io.cc io.hh
-
+		g++ -c io.cc

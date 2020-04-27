@@ -7,6 +7,7 @@
 // Main for testing only
 int main() {
 
+    makeGraph();
     // Testing for generate input numbers
     std::vector<int> v = genInputNumbers(100, 100000);
     for (int i=0; i<v.size(); i++) {
