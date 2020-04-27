@@ -72,32 +72,52 @@ n = seconds to run function
 
 
 ## Other Methods
+
 ### File: io.cc
 
 #### inputFile
 - Input: file of integers
 - Output: None
+
 #### outputTable
+- Purpose: output timing data for different data structures and methods run on them
 - Input: Timing data as a 2D array
 - Input: column labels 
 - Input: row labels
 - Output: Table formatted with timing data
-- std::vector<int> genInputNumbers(int length, int max);
-  - ##### Helper functions
-  - void outputColLabels(std::vector<std::string> colLabels);
-  - void outputDivider(int size);
-  - void outputRowLabel(std::string label);
-  - void outputData(double data, int p);
+##### Helper functions
+- void outputColLabels(std::vector<std::string> colLabels);
+- void outputDivider(int size);
+- void outputRowLabel(std::string label);
+- void outputData(double data, int p);
+
 #### getCurrentTime
 - Input: none
 - Output: number of milliseconds since epoch time
+
 #### Generate input numbers
-- Input: integer n: number of ints to generate
+- Input: int n: number of ints to generate
 - Output: An array or file containing ints
+
 #### Parse command line args
 - Input: argv
 - Output: Control flow
 
+### File: graph.cc
+
+#### Dependencies:
+- matplotlibcpp.h
+- Python 2.7
+- Numpy
+
+#### makeGraph
+- Purpose: Create a graph comparing timing data from different data structures and methods run on them.
+- Input: Will accept timing data in future update
+- Output: A graph. Returns void.
+
+##### Helper functions
+- labelSpacing
+- Input: int numLabels: The number of x axis labels
 
 ## References:
 1. https://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/
