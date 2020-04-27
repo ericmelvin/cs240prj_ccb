@@ -17,6 +17,9 @@ int main(){
 	//std::cout << rbtRoot->printNode() << std::endl;
 	rbt.printInOrder();
 	rbt.printLevelOrder();
+	std::cout << "Max: " << rbt.findMax() << std::endl;
+	std::cout << "Min: " << rbt.findMin() << std::endl;
+
 
 	std::cout << "~~~ after deleting 1,2,3 ~~~" << std::endl;
 	rbt.deleteByVal(1);

@@ -475,4 +475,22 @@ public:
         levelOrder(root);
 	std::cout << std::endl;
     }
+
+    int findMax(){
+    	Node *temp = root;
+	while(temp->right != nullptr){
+		temp = temp->right;
+	}
+	return temp->val;
+    }
+
+    int findMin(){
+    	Node *temp = root;
+	while(temp->left != nullptr){
+		temp = temp->left;
+	}
+	return temp->val;
+    }
+
+
 };
