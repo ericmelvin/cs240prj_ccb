@@ -2,104 +2,44 @@
 
 //Insert - Determines where the new node for an int will be inserted in the 
 //         binary search tree
-void BST::Insert(nodePtr newNode)
+void Insert(node* n)
 {
-	nodePtr currentNode;
-	bool found;
+	node* curr = root;
+	bool found = false;
 
-	//Initialize false
-	found = false;
-
-	//Start from the root of the tree
-	currentNode = root;
-
-	//Determine the location of the insertion based on root
 	if (root == NULL)
 	{
-		root = newNode;
+		root = n;
 	}
 	else
 	{
-		//Determine the type of insertion based on isAlpha
-		if (isAlpha)
+		//While not at the end of list
+		while (!found)
 		{
-			//While not at the end of list
-			while (!found)
+			//Left
+			if (n->data < curr->data)
 			{
-				//Determine the direction of the tree based on the node value
-				if (newNode->data.letter < currentNode->data.letter)
+				if (curr->left == NULL)
 				{
-					//Determine to insert a node based on the left ptr
-					if (currentNode->left == NULL)
-					{
-						//Assign current node a value
-						currentNode->left = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->left;
-					}
-
+					curr->left = n;
+					found = true;
 				}
 				else
 				{
-					//Determine to insert a node based on the right ptr
-					if (currentNode->right == NULL)
-					{
-						//Assign current node a value
-						currentNode->right = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->right;
-					}
+					curr = curr->left;
 				}
-			}
-		}
-		else
-		{
-			//While not at the end of list
-			while (!found)
+
+			}//Right
+			else
 			{
-				//Determine the direction of the tree based on the node value
-				if (newNode->data.count < currentNode->data.count)
+				if (curr->right == NULL)
 				{
-					//Determine to insert a node based on the left ptr
-					if (currentNode->left == NULL)
-					{
-						//Assign current node a value
-						currentNode->left = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->left;
-					}
-
+					curr->right = n;
+					found = true;
 				}
 				else
 				{
-					//Determine to insert a node based on the right ptr
-					if (currentNode->right == NULL)
-					{
-						//Assign current node a value
-						currentNode->right = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->right;
-					}
+					curr = curr->right;
 				}
 			}
 		}
@@ -107,171 +47,132 @@ void BST::Insert(nodePtr newNode)
 }
 
 //DeleteLeafNode - Delete a leaf node from the tree
-void BST::DeleteLeafNode(nodePtr & currentPtr, nodePtr & parentPtr)
+void DeleteLeafNode(node* & curr, node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != NULL)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		//Determine the parent's child
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = NULL;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = nullptr;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = NULL;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = nullptr;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
-		root = NULL;
-
-		//Delete currentPtr
-		delete currentPtr;
+		root = nullptr;
+		delete curr;
 	}
 }
 
 //DeleteNodeLeftChildOnly - Delete a node with a left child from the tree
-void BST::DeleteNodeLeftChildOnly(nodePtr & currentPtr, nodePtr & parentPtr)
+void DeleteNodeLeftChildOnly(node* & curr, node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != NULL)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = currentPtr->left;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = curr->left;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = currentPtr->left;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = curr->left;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
 		root = root->left;
 	}
 }
 
 //DeleteNodeRightChildOnly - Delete a node with a right child from the tree
-void BST::DeleteNodeRightChildOnly(nodePtr & currentPtr, nodePtr & parentPtr)
+void DeleteNodeRightChildOnly(node* & curr, node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != NULL)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = currentPtr->right;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = curr->right;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = currentPtr->right;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = curr->right;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
 		root = root->right;
 	}
 }
 
 //DeleteNodeWithTwoChildren - Delete a node with two children from the tree
-void BST::DeleteNodeWithTwoChildren(nodePtr & currentPtr, nodePtr & parentPtr)
+void DeleteNodeWithTwoChildren(node* & curr, node* & parent)
 {
-	nodePtr dNode;
+	node* dNode;
+	dNode = curr;
+	curr = curr->left;
 
-	//Assign dNode a value
-	dNode = currentPtr;
-
-	//Assign current ptr a value
-	currentPtr = currentPtr->left;
-
-	//Determine parentPtr value based on currentPtr
-	if (currentPtr->right == NULL)
+	if (curr->right == NULL)
 	{
-		parentPtr = dNode;
+		parent = dNode;
 	}
 
 	//While not at the end of the list
-	while (currentPtr->right != NULL)
+	while (curr->right != NULL)
 	{
-		//Assign parentPtr and currentPtr each a value
-		parentPtr = currentPtr;
-		currentPtr = currentPtr->right;
+		//Assign parent and curr each a value
+		parent = curr;
+		curr = curr->right;
 	}
 
 	//Assign a value for root
-	dNode->data.count = currentPtr->data.count;
-	dNode->data.letter = currentPtr->data.letter;
-
-	Delete(currentPtr, parentPtr);
-
+	dNode->data = curr->data;
+	Delete(curr, parent);
 }
 
 //Delete - Call one of four delete methods based on the node type
-void BST::Delete(nodePtr & currentPtr, nodePtr & parentPtr)
+void Delete(node* & curr, node* & parent)
 {
-	//Determine the delete method based on the currentPtr
-	if (currentPtr->left == NULL && currentPtr->right == NULL)
+	//Determine the delete method based on the curr
+	if (curr->left == NULL && curr->right == NULL)
 	{
-		DeleteLeafNode(currentPtr, parentPtr);
+		DeleteLeafNode(curr, parent);
 	}
-	else if (currentPtr->left != NULL && currentPtr->right == NULL)
+	else if (curr->left != NULL && curr->right == NULL)
 	{
-		DeleteNodeLeftChildOnly(currentPtr, parentPtr);
+		DeleteNodeLeftChildOnly(curr, parent);
 	}
-	else if (currentPtr->left == NULL && currentPtr->right != NULL)
+	else if (curr->left == NULL && curr->right != NULL)
 	{
-		DeleteNodeRightChildOnly(currentPtr, parentPtr);
+		DeleteNodeRightChildOnly(curr, parent);
 	}
 	else
 	{
-		DeleteNodeWithTwoChildren(currentPtr, parentPtr);
+		DeleteNodeWithTwoChildren(curr, parent);
 	}
 }
 
 //CreateTree - Set the root to NULL and isAlpha to true
-void BST::CreateTree(void)
+void CreateTree(void)
 {
 	root = NULL;
-	isAlpha = true;
 }
 
-//GetANode - Store a letter and the count in a node pointer and returns the pointer
-nodePtr BST::GetANode(char aLetter, int letterCount)
+//CreateNode - Create a node pointer with num and returns the pointer
+node* CreateNode(int num)
 {
-	//Create a node, set ptr to address of this node
-	nodePtr aNode = new node;
+	node* aNode = new node;
 
-	aNode->data.count = letterCount;
-	aNode->data.letter = aLetter;
+	aNode->data = num;
 
 	aNode->left = NULL;
 	aNode->right = NULL;
@@ -279,23 +180,25 @@ nodePtr BST::GetANode(char aLetter, int letterCount)
 	return aNode;
 }
 
+//-----------------------------------------WORKING-----------------------------------------------
+
 //BuildTree - Create a binary search tree in numberic order using a passed in tree
-void BST::BuildCountTree(nodePtr parentPtr)
+void BuildCountTree(node* parent)
 {
 	//Assign isAlpha a value
 	isAlpha = false;
 
-	//Determine the to insert based on parentPtr
-	if (parentPtr != NULL)
+	//Determine the to insert based on parent
+	if (parent != NULL)
 	{
-		Insert(GetANode(parentPtr->data.letter, parentPtr->data.count));
-		BuildCountTree(parentPtr->left);
-		BuildCountTree(parentPtr->right);
+		Insert(GetANode(parent->data.letter, parent->data.count));
+		BuildCountTree(parent->left);
+		BuildCountTree(parent->right);
 	}
 }
 
 //ProcessText - Read the text file and update the tree with all the letters
-void BST::ProcessText(ifstream & fin)
+void ProcessText(ifstream & fin)
 {
 	char letter;
 
@@ -320,75 +223,75 @@ void BST::ProcessText(ifstream & fin)
 }
 
 //Inorder - Traverse the binary tree and output the data inorder
-void BST::Inorder(ofstream & fout, nodePtr currentPtr)
+void Inorder(ofstream & fout, node* curr)
 {
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
+	//Determine to output based on the curr
+	if (curr != NULL)
 	{
-		Inorder(fout, currentPtr->left);
+		Inorder(fout, curr->left);
 
 		//Output the current letter and count to the ouput file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
+		fout << setw(20) << curr->data.letter
+			<< setw(20) << curr->data.count << endl;
 
-		Inorder(fout, currentPtr->right);
+		Inorder(fout, curr->right);
 	}
 }
 
 //Preorder - Traverse the binary tree and output the data preorder
-void BST::Preorder(ofstream & fout, nodePtr currentPtr)
+void Preorder(ofstream & fout, node* curr)
 {
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
+	//Determine to output based on the curr
+	if (curr != NULL)
 	{
 		//Output the current letter and count to the output file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
+		fout << setw(20) << curr->data.letter
+			<< setw(20) << curr->data.count << endl;
 
-		Inorder(fout, currentPtr->left);
-		Inorder(fout, currentPtr->right);
+		Inorder(fout, curr->left);
+		Inorder(fout, curr->right);
 	}
 }
 
 //Postorder - Traverse the binary tree and output the data postorder
-void BST::Postorder(ofstream & fout, nodePtr currentPtr)
+void Postorder(ofstream & fout, node* curr)
 {
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
+	//Determine to output based on the curr
+	if (curr != NULL)
 	{
-		Inorder(fout, currentPtr->left);
-		Inorder(fout, currentPtr->right);
+		Inorder(fout, curr->left);
+		Inorder(fout, curr->right);
 
 		//Output the current letter and count to the output file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
+		fout << setw(20) << curr->data.letter
+			<< setw(20) << curr->data.count << endl;
 	}
 }
 
 //Updatetree - Searching for the letter passed into the method and updates the count
-void BST::UpdateTree(char aLetter, nodePtr currentPtr)
+void UpdateTree(char aLetter, node* curr)
 {
-	//Determine the letter position based on the currentPtr
-	if (currentPtr->data.letter > aLetter)
+	//Determine the letter position based on the curr
+	if (curr->data.letter > aLetter)
 	{
-		UpdateTree(aLetter, currentPtr->left);
+		UpdateTree(aLetter, curr->left);
 	}
-	else if (currentPtr->data.letter < aLetter)
+	else if (curr->data.letter < aLetter)
 	{
-		UpdateTree(aLetter, currentPtr->right);
+		UpdateTree(aLetter, curr->right);
 	}
-	else if (currentPtr->data.letter == aLetter)
+	else if (curr->data.letter == aLetter)
 	{
-		//Increment currentPtr count
-		currentPtr->data.count++;
+		//Increment curr count
+		curr->data.count++;
 	}
 }
 
 //FindMax - Search a binary tree and find the largest count
-int BST::FindLargestCount(void)
+int FindLargestCount(void)
 {
 	int largest;
-	nodePtr ptr;
+	node* ptr;
 
 	//Initialize prt and largest
 	ptr = root;
@@ -408,80 +311,80 @@ int BST::FindLargestCount(void)
 }
 
 //SearchTree - Search the tree for a node with the right data, return that node and the parent
-void BST::SearchTree(nodeStructType searchNode, bool & found,
-	nodePtr & currentPtr, nodePtr & parentPtr)
+void SearchTree(nodeStructType searchNode, bool & found,
+	node* & curr, node* & parent)
 {
-	//Initialize currentPtr, parentPtr and found
-	currentPtr = root;
-	parentPtr = NULL;
+	//Initialize curr, parent and found
+	curr = root;
+	parent = NULL;
 	found = false;
 
 	//Determine the type of search based on isAlpha
 	if (isAlpha)
 	{
 		//While not at the end of list or found is false
-		while (currentPtr != NULL && !found)
+		while (curr != NULL && !found)
 		{
 			//Determine the found value based on the node's letter
-			if (searchNode.letter == currentPtr->data.letter)
+			if (searchNode.letter == curr->data.letter)
 			{
 				//Assign found a value
 				found = true;
 			}
-			else if (searchNode.letter < currentPtr->data.letter)
+			else if (searchNode.letter < curr->data.letter)
 			{
 				//Assign current ptr to parent
-				parentPtr = currentPtr;
+				parent = curr;
 
 				//Move to the left of the list
-				currentPtr = currentPtr->left;
+				curr = curr->left;
 			}
 			else
 			{
 				//Assign current ptr to parent
-				parentPtr = currentPtr;
+				parent = curr;
 
 				//Move to the right of the list
-				currentPtr = currentPtr->right;
+				curr = curr->right;
 			}
 		}
 	}
 	else
 	{
 		//While not at the end of list or found is false
-		while (currentPtr != NULL && !found)
+		while (curr != NULL && !found)
 		{
 			//Determine the found value based on the node's count
-			if (searchNode.count == currentPtr->data.count)
+			if (searchNode.count == curr->data.count)
 			{
 				//Assign found a value
 				found = true;
 			}
-			else if (searchNode.letter < currentPtr->data.letter)
+			else if (searchNode.letter < curr->data.letter)
 			{
 				//Assign current ptr to parent
-				parentPtr = currentPtr;
+				parent = curr;
 
 				//Move to the left of the list
-				currentPtr = currentPtr->left;
+				curr = curr->left;
 			}
 			else
 			{
 				//Assign current ptr to parent
-				parentPtr = currentPtr;
+				parent = curr;
 
 				//Move to the right of the list
-				currentPtr = currentPtr->right;
+				curr = curr->right;
 			}
 		}
 	}
 }
 
 //DeleteNode - Delete the passed in node if found and output the result
-void BST::DeleteNode(nodeStructType searchNode, bool & found)
+void DeleteNode(nodeStructType searchNode, bool & found)
 {
-	nodePtr current;
-	nodePtr parent;
+	node* current;
+	node* parent;
 
 	SearchTree(searchNode, found, current, parent);
 
@@ -493,7 +396,7 @@ void BST::DeleteNode(nodeStructType searchNode, bool & found)
 }
 
 //DestroyTree - Delete all nodes in the tree
-void BST::DestroyTree(void)
+void DestroyTree(void)
 {
 	int count;
 
@@ -522,7 +425,7 @@ void BST::DestroyTree(void)
 }
 
 //Print - Output a heading identifying which tree is being printed and the tree
-void BST::Print(ofstream & fout, string traversalType, string treeType, string taskType)
+void Print(ofstream & fout, string traversalType, string treeType, string taskType)
 {
 	PrintDivider(fout, '-', DIVIDER_WIDTH);
 
