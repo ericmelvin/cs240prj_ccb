@@ -5,70 +5,63 @@
 #ifndef BST_HH
 #define BST_HH
 
-//Define node structure
-struct node
+//Define Node structure
+struct Node
 {
 	int data;
-	node* left;
-	node* right;
+	Node* left;
+	Node* right;
 
 	Node(int num)
-		:data(num), left(nullptr), child(nullptr)
+		:data(num), left(nullptr), right(nullptr)
 	{}
 };
 
 class BST
 {
 private:
-	nodePtr root;
+	Node* root;
+	int dups;
 
-	void Insert(node* n);
-	void DeleteLeafNode(node*& curr, node*& parent);
-	void DeleteNodeLeftChildOnly(node*& curr, node*& parent);
-	void DeleteNodeRightChildOnly(node*& curr, node*& parent);
-	void DeleteNodeWithTwoChildren(node*& curr, node*& parent);
-	void Delete(node*& curr, node*& parent);
+	void Insert(Node* n);
+
+	void DeleteLeafNode(Node*& curr, Node*& parent);
+
+	void DeleteNodeLeftChildOnly(Node*& curr, Node*& parent);
+
+	void DeleteNodeRightChildOnly(Node*& curr, Node*& parent);
+
+	void DeleteNodeWithTwoChildren(Node*& curr, Node*& parent);
+
+	void Delete(Node*& curr, Node*& parent);
 public:
 	//Constructor
-	BST() { CreateTree(); };
+	BST() {};
 
 	void CreateTree(void);
 
 	bool IsEmpty(void) { return root == NULL; };
 
-	node* GetRoot(void) { return root; };
+	Node* GetRoot(void) { return root; };
 
-	node* CreateNode(int num);
+	Node* CreateNode(int num);
 
 	//------------------------WORKING-----------------------------
 
-	void BuildTree(nodePtr parentPtr);
-
-	void ProcessText(ifstream& fin);
-
-	void Inorder(ofstream& fout, nodePtr currentPtr);
-
-	void Preorder(ofstream& fout, nodePtr currentPtr);
-
-	void Postorder(ofstream& fout, nodePtr currentPtr);
-
-	void UpdateTree(char aLetter, nodePtr currentPtr);
+	void BuildTree(std::ifstream & fin);
 
 	int FindMax(void);
 
 	int FindMin(void);
 
-	void SearchTree(nodeStructType searchNode, bool& found,
-		nodePtr& currentPtr, nodePtr& parentPtr);
+	void SearchTree(int num, bool & found, Node* & curr, Node* & parent);
 
-	void DeleteNode(nodeStructType searchNode, bool& found);
+	void DeleteNode(int num);
 
 	void DestroyTree(void);
 
-	void Print(ofstream& fout, string traversalType, string treeType, string taskType);
-
 	//Destructor
-	~BST() { DestroyTree(); };
+	~BST() {};
 
 };
 

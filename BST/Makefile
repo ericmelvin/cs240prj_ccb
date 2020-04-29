@@ -14,4 +14,4 @@ bst:	bst.hh main.cc
 
 .phony:		clean
 clean:
-		rm -f *~ *.o cache-sim
+		rm -f *~ *.o main bst

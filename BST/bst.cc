@@ -1,404 +1,213 @@
 #include "bst.hh"
 
-//Insert - Determines where the new node for an int will be inserted in the 
+//Insert - Determines where the new Node for an int will be inserted in the 
 //         binary search tree
-void Insert(nodePtr newNode)
+BST() { CreateTree(); };
+
+void Insert(Node* n)
 {
-	nodePtr currentNode;
-	bool found;
+	Node* curr = root;
+	bool found = false;
 
-	//Initialize false
-	found = false;
-
-	//Start from the root of the tree
-	currentNode = root;
-
-	//Determine the location of the insertion based on root
-	if (root == NULL)
+	if (root == nullptrptr)
 	{
-		root = newNode;
+		root = n;
 	}
 	else
 	{
-		//Determine the type of insertion based on isAlpha
-		if (isAlpha)
+		//While not at the end of list
+		while (!found)
 		{
-			//While not at the end of list
-			while (!found)
+			//Left
+			if (n->data < curr->data)
 			{
-				//Determine the direction of the tree based on the node value
-				if (newNode->data.letter < currentNode->data.letter)
+				if (curr->left == nullptrptr)
 				{
-					//Determine to insert a node based on the left ptr
-					if (currentNode->left == NULL)
-					{
-						//Assign current node a value
-						currentNode->left = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->left;
-					}
-
+					curr->left = n;
+					found = true;
 				}
 				else
 				{
-					//Determine to insert a node based on the right ptr
-					if (currentNode->right == NULL)
-					{
-						//Assign current node a value
-						currentNode->right = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->right;
-					}
+					curr = curr->left;
 				}
-			}
-		}
-		else
-		{
-			//While not at the end of list
-			while (!found)
+
+			}//Right
+			else if (n->data > curr->data)
 			{
-				//Determine the direction of the tree based on the node value
-				if (newNode->data.count < currentNode->data.count)
+				if (curr->right == nullptrptr)
 				{
-					//Determine to insert a node based on the left ptr
-					if (currentNode->left == NULL)
-					{
-						//Assign current node a value
-						currentNode->left = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->left;
-					}
-
+					curr->right = n;
+					found = true;
 				}
 				else
 				{
-					//Determine to insert a node based on the right ptr
-					if (currentNode->right == NULL)
-					{
-						//Assign current node a value
-						currentNode->right = newNode;
-
-						//Assign found a value
-						found = true;
-					}
-					else
-					{
-						currentNode = currentNode->right;
-					}
+					curr = curr->right;
 				}
+			}//Equal
+			else {
+				dups++;
 			}
 		}
 	}
 }
 
-//DeleteLeafNode - Delete a leaf node from the tree
-void DeleteLeafNode(nodePtr & currentPtr, nodePtr & parentPtr)
+//DeleteLeafNode - Delete a leaf Node from the tree
+void DeleteLeafNode(Node* & curr, Node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != nullptrptr)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		//Determine the parent's child
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = NULL;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = nullptrptr;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = NULL;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = nullptrptr;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
-		root = NULL;
-
-		//Delete currentPtr
-		delete currentPtr;
+		root = nullptrptr;
+		delete curr;
 	}
 }
 
-//DeleteNodeLeftChildOnly - Delete a node with a left child from the tree
-void DeleteNodeLeftChildOnly(nodePtr & currentPtr, nodePtr & parentPtr)
+//DeleteNodeLeftChildOnly - Delete a Node with a left child from the tree
+void DeleteNodeLeftChildOnly(Node* & curr, Node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != nullptrptr)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = currentPtr->left;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = curr->left;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = currentPtr->left;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = curr->left;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
 		root = root->left;
 	}
 }
 
-//DeleteNodeRightChildOnly - Delete a node with a right child from the tree
-void DeleteNodeRightChildOnly(nodePtr & currentPtr, nodePtr & parentPtr)
+//DeleteNodeRightChildOnly - Delete a Node with a right child from the tree
+void DeleteNodeRightChildOnly(Node* & curr, Node* & parent)
 {
-	//Determine the node location based on parentPtr
-	if (parentPtr != NULL)
+	if (parent != nullptrptr)
 	{
-		//Determine the parent's child based on the currentPtr
-		if (parentPtr->left == currentPtr)
+		if (parent->left == curr)
 		{
-			//Assign parent left ptr a value
-			parentPtr->left = currentPtr->right;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->left = curr->right;
+			delete curr;
 		}
 		else
 		{
-			//Assign parent right ptr a value
-			parentPtr->right = currentPtr->right;
-
-			//Delete currentPtr
-			delete currentPtr;
+			parent->right = curr->right;
+			delete curr;
 		}
 	}
 	else
 	{
-		//Assign root a value
 		root = root->right;
 	}
 }
 
-//DeleteNodeWithTwoChildren - Delete a node with two children from the tree
-void DeleteNodeWithTwoChildren(nodePtr & currentPtr, nodePtr & parentPtr)
+//DeleteNodeWithTwoChildren - Delete a Node with two children from the tree
+void DeleteNodeWithTwoChildren(Node* & curr, Node* & parent)
 {
-	nodePtr dNode;
+	Node* dNode;
+	dNode = curr;
+	curr = curr->left;
 
-	//Assign dNode a value
-	dNode = currentPtr;
-
-	//Assign current ptr a value
-	currentPtr = currentPtr->left;
-
-	//Determine parentPtr value based on currentPtr
-	if (currentPtr->right == NULL)
+	if (curr->right == nullptrptr)
 	{
-		parentPtr = dNode;
+		parent = dNode;
 	}
 
 	//While not at the end of the list
-	while (currentPtr->right != NULL)
+	while (curr->right != nullptrptr)
 	{
-		//Assign parentPtr and currentPtr each a value
-		parentPtr = currentPtr;
-		currentPtr = currentPtr->right;
+		//Assign parent and curr each a value
+		parent = curr;
+		curr = curr->right;
 	}
 
 	//Assign a value for root
-	dNode->data.count = currentPtr->data.count;
-	dNode->data.letter = currentPtr->data.letter;
-
-	Delete(currentPtr, parentPtr);
-
+	dNode->data = curr->data;
+	Delete(curr, parent);
 }
 
-//Delete - Call one of four delete methods based on the node type
-void Delete(nodePtr & currentPtr, nodePtr & parentPtr)
+//Delete - Call one of four delete methods based on the Node type
+void Delete(Node* & curr, Node* & parent)
 {
-	//Determine the delete method based on the currentPtr
-	if (currentPtr->left == NULL && currentPtr->right == NULL)
+	//Determine the delete method based on the curr
+	if (curr->left == nullptr && curr->right == nullptr)
 	{
-		DeleteLeafNode(currentPtr, parentPtr);
+		DeleteLeafNode(curr, parent);
 	}
-	else if (currentPtr->left != NULL && currentPtr->right == NULL)
+	else if (curr->left != nullptr && curr->right == nullptr)
 	{
-		DeleteNodeLeftChildOnly(currentPtr, parentPtr);
+		DeleteNodeLeftChildOnly(curr, parent);
 	}
-	else if (currentPtr->left == NULL && currentPtr->right != NULL)
+	else if (curr->left == nullptr && curr->right != nullptr)
 	{
-		DeleteNodeRightChildOnly(currentPtr, parentPtr);
+		DeleteNodeRightChildOnly(curr, parent);
 	}
 	else
 	{
-		DeleteNodeWithTwoChildren(currentPtr, parentPtr);
+		DeleteNodeWithTwoChildren(curr, parent);
 	}
 }
 
-//CreateTree - Set the root to NULL and isAlpha to true
+//CreateTree - Set the root to nullptr and isAlpha to true
 void CreateTree(void)
 {
-	root = NULL;
-	isAlpha = true;
+	root = nullptr;
 }
 
-//GetANode - Store a letter and the count in a node pointer and returns the pointer
-nodePtr GetANode(char aLetter, int letterCount)
+//CreateNode - Create a Node pointer with num and returns the pointer
+Node* CreateNode(int num)
 {
-	//Create a node, set ptr to address of this node
-	nodePtr aNode = new node;
+	Node* aNode = new Node;
 
-	aNode->data.count = letterCount;
-	aNode->data.letter = aLetter;
+	aNode->data = num;
 
-	aNode->left = NULL;
-	aNode->right = NULL;
+	aNode->left = nullptr;
+	aNode->right = nullptr;
 
 	return aNode;
 }
 
+//-----------------------------------------WORKING-----------------------------------------------
+
 //BuildTree - Create a binary search tree in numberic order using a passed in tree
-void BuildCountTree(nodePtr parentPtr)
+void BuildTree(std::ifstream & fin)
 {
-	//Assign isAlpha a value
-	isAlpha = false;
-
-	//Determine the to insert based on parentPtr
-	if (parentPtr != NULL)
+	int num;
+	if (fin >> num)
 	{
-		Insert(GetANode(parentPtr->data.letter, parentPtr->data.count));
-		BuildCountTree(parentPtr->left);
-		BuildCountTree(parentPtr->right);
+		Insert(CreateNode(num));
 	}
 }
 
-//ProcessText - Read the text file and update the tree with all the letters
-void ProcessText(ifstream & fin)
+//FindMax - Search a binary tree and find the largest data
+int FindMax(void)
 {
-	char letter;
-
-	//Input the letter from the input file
-	fin >> letter;
-
-	//While there are data in the file
-	while (fin)
-	{
-		//Lowercase the letter
-		letter = tolower(letter);
-
-		//Determine to update tree based on the input character
-		if (isalpha(letter))
-		{
-			UpdateTree(letter, root);
-		}
-
-		//Input the letter from the input file
-		fin >> letter;
-	}
-}
-
-//Inorder - Traverse the binary tree and output the data inorder
-void Inorder(ofstream & fout, nodePtr currentPtr)
-{
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
-	{
-		Inorder(fout, currentPtr->left);
-
-		//Output the current letter and count to the ouput file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
-
-		Inorder(fout, currentPtr->right);
-	}
-}
-
-//Preorder - Traverse the binary tree and output the data preorder
-void Preorder(ofstream & fout, nodePtr currentPtr)
-{
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
-	{
-		//Output the current letter and count to the output file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
-
-		Inorder(fout, currentPtr->left);
-		Inorder(fout, currentPtr->right);
-	}
-}
-
-//Postorder - Traverse the binary tree and output the data postorder
-void Postorder(ofstream & fout, nodePtr currentPtr)
-{
-	//Determine to output based on the currentPtr
-	if (currentPtr != NULL)
-	{
-		Inorder(fout, currentPtr->left);
-		Inorder(fout, currentPtr->right);
-
-		//Output the current letter and count to the output file
-		fout << setw(20) << currentPtr->data.letter
-			<< setw(20) << currentPtr->data.count << endl;
-	}
-}
-
-//Updatetree - Searching for the letter passed into the method and updates the count
-void UpdateTree(char aLetter, nodePtr currentPtr)
-{
-	//Determine the letter position based on the currentPtr
-	if (currentPtr->data.letter > aLetter)
-	{
-		UpdateTree(aLetter, currentPtr->left);
-	}
-	else if (currentPtr->data.letter < aLetter)
-	{
-		UpdateTree(aLetter, currentPtr->right);
-	}
-	else if (currentPtr->data.letter == aLetter)
-	{
-		//Increment currentPtr count
-		currentPtr->data.count++;
-	}
-}
-
-//FindMax - Search a binary tree and find the largest count
-int FindLargestCount(void)
-{
-	int largest;
-	nodePtr ptr;
-
-	//Initialize prt and largest
-	ptr = root;
-	largest = 0;
+	int largest = 0;
+	Node* ptr = root;
 
 	//While not at the end of list
-	while (ptr != NULL)
+	while (ptr != nullptr)
 	{
 		//Assign largest a value
-		largest = ptr->data.count;
+		largest = ptr->data;
 
 		//Move the pointer along
 		ptr = ptr->right;
@@ -407,159 +216,83 @@ int FindLargestCount(void)
 	return largest;
 }
 
-//SearchTree - Search the tree for a node with the right data, return that node and the parent
-void SearchTree(nodeStructType searchNode, bool & found,
-	nodePtr & currentPtr, nodePtr & parentPtr)
+//FindMin - Search a binary tree and find the smallest data
+int FindMin(void)
 {
-	//Initialize currentPtr, parentPtr and found
-	currentPtr = root;
-	parentPtr = NULL;
+	int smallest = 0;
+	Node* ptr = root;
+
+	//While not at the end of list
+	while (ptr != nullptr)
+	{
+		//Assign largest a value
+		smallest = ptr->data;
+
+		//Move the pointer along
+		ptr = ptr->left;
+	}
+
+	return smallest;
+}
+
+//SearchTree - Search the tree for a Node with the right data, return that Node and the parent
+void SearchTree(int num, bool & found, Node* & curr, Node* & parent)
+{
+	curr = root;
+	parent = nullptr;
 	found = false;
 
-	//Determine the type of search based on isAlpha
-	if (isAlpha)
+	//While not at the end of list or found is false
+	while (curr != nullptr && !found)
 	{
-		//While not at the end of list or found is false
-		while (currentPtr != NULL && !found)
+		if (num == curr->data)
 		{
-			//Determine the found value based on the node's letter
-			if (searchNode.letter == currentPtr->data.letter)
-			{
-				//Assign found a value
-				found = true;
-			}
-			else if (searchNode.letter < currentPtr->data.letter)
-			{
-				//Assign current ptr to parent
-				parentPtr = currentPtr;
-
-				//Move to the left of the list
-				currentPtr = currentPtr->left;
-			}
-			else
-			{
-				//Assign current ptr to parent
-				parentPtr = currentPtr;
-
-				//Move to the right of the list
-				currentPtr = currentPtr->right;
-			}
+			found = true;
 		}
-	}
-	else
-	{
-		//While not at the end of list or found is false
-		while (currentPtr != NULL && !found)
+		else if (num < curr->data)
 		{
-			//Determine the found value based on the node's count
-			if (searchNode.count == currentPtr->data.count)
-			{
-				//Assign found a value
-				found = true;
-			}
-			else if (searchNode.letter < currentPtr->data.letter)
-			{
-				//Assign current ptr to parent
-				parentPtr = currentPtr;
-
-				//Move to the left of the list
-				currentPtr = currentPtr->left;
-			}
-			else
-			{
-				//Assign current ptr to parent
-				parentPtr = currentPtr;
-
-				//Move to the right of the list
-				currentPtr = currentPtr->right;
-			}
+			parent = curr;
+			curr = curr->left;
+		}
+		else
+		{
+			parent = curr;
+			curr = curr->right;
 		}
 	}
 }
 
-//DeleteNode - Delete the passed in node if found and output the result
-void DeleteNode(nodeStructType searchNode, bool & found)
+//DeleteNode - Delete the passed in Node if found and output the result
+void DeleteNode(int num)
 {
-	nodePtr current;
-	nodePtr parent;
+	Node* current;
+	Node* parent;
+	bool found = false;
 
 	SearchTree(searchNode, found, current, parent);
 
-	//Determine the output based on found
 	if (found)
 	{
 		Delete(current, parent);
 	}
 }
 
-//DestroyTree - Delete all nodes in the tree
+//DestroyTree - Delete all Nodes in the tree
 void DestroyTree(void)
 {
-	int count;
-
-	bool found;
-
-	//Initialize count and found
-	count = 1;
-	found = false;
-
+	int count = 1;
+	
 	//While root is not deleted
-	while (root != NULL)
+	while (root != nullptr)
 	{
-		//Output deleted message to the screen
-		cout << "Destroy #" << count << endl
-			<< "Deleted Node - Letter: " << root->data.letter
-			<< " Count: " << root->data.count << endl;
+		//Uncomment for debugging
+		//cout << "Destroy #" << count << endl
+		//	<< " Data: " << root->data.count << endl;
 
-		DeleteNode(root->data, found);
+		DeleteNode(root->data);
 
-		//Increment count
 		count++;
 	}
-
-	//Output a blank line
-	cout << endl;
 }
 
-//Print - Output a heading identifying which tree is being printed and the tree
-void Print(ofstream & fout, string traversalType, string treeType, string taskType)
-{
-	PrintDivider(fout, '-', DIVIDER_WIDTH);
-
-	//Output the print heading to the output file
-	fout << "This is the " << treeType << " tree" << endl;
-	fout << traversalType << " traversal of the tree" << endl;
-	fout << "Task Performed: " << taskType << endl;
-
-	PrintDivider(fout, '-', DIVIDER_WIDTH);
-
-	//Output the print heading to the output file
-	fout << setw(20) << "Letter" << setw(20) << "Count" << endl;
-
-	PrintDivider(fout, '-', DIVIDER_WIDTH);
-
-	//Determine the type of traverse base on traversal type
-	if (traversalType == "Preorder")
-	{
-		Preorder(fout, root);
-	}
-	else if (traversalType == "Inorder")
-	{
-		Inorder(fout, root);
-	}
-	else
-	{
-		Postorder(fout, root);
-	}
-
-	PrintDivider(fout, '-', DIVIDER_WIDTH);
-
-	//Output the sum of counts to the output file
-	fout << "Sum of Counts: " << setw(25) << SumCounts(root) << endl;
-
-	PrintDivider(fout, '-', DIVIDER_WIDTH);
-
-	//Output a blank line to the output file
-	fout << endl;
-}
-
+~BST() { DestroyTree(); };
