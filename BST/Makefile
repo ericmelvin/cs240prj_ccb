@@ -9,8 +9,8 @@ all:	bst
 main:	$(OFILES)
 	$(CXX) $(OFILES) -o main
 
-bst:	bst.hh main.cc
-	$(CXX) bst.hh main.cc -o bst
+bst:	bst.hh bst.cc main.cc
+	$(CXX) bst.hh bst.cc main.cc -o bst
 
 .phony:		clean
 clean:

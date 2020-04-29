@@ -36,7 +36,7 @@ private:
 	void Delete(Node*& curr, Node*& parent);
 public:
 	//Constructor
-	BST() {};
+	BST() { CreateTree(); };
 
 	void CreateTree(void);
 
@@ -54,14 +54,16 @@ public:
 
 	int FindMin(void);
 
-	void SearchTree(int num, bool & found, Node* & curr, Node* & parent);
+	bool Search(int num, Node* & curr, Node* & parent);
+
+	bool Search(int num);
 
 	void DeleteNode(int num);
 
 	void DestroyTree(void);
 
 	//Destructor
-	~BST() {};
+	~BST() { DestroyTree(); };
 
 };
 
