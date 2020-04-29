@@ -42,16 +42,16 @@ n = seconds to run function
 
 ### BST Methods
 
-#### insert
+#### Insert
 - Input: int value to insert
 - Output: none
-#### findMin
+#### FindMin
 - Input: none
 - Output: integer min_value
-#### findMax
+#### FindMax
 - Input: none
 - Output: integer max_value
-#### findK
+#### Search
 - Input: an arbitrary value k to search for
 - Ouput: boolean found_k
 
