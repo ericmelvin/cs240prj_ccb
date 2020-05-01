@@ -10,12 +10,12 @@ namespace plt = matplotlibcpp;
 std::vector<int> labelSpacing(int numLabels) { 
     std::vector<int> spacing;
     for (int i=0; i<numLabels; i++) {
-        spacing.push_back(i);
+        spacing.push_back(i*2);
     }
     return spacing;
 }
 void makeGraph() {
-    std::vector<std::string> labels = {"findMin()", "findMax()", "findK()", "insert()"};
+    std::vector<std::string> labels = {"findMin()", "findMax()", "search()", "insert()"};
 
     std::vector<int> spacing = labelSpacing(labels.size());
     
