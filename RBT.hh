@@ -4,28 +4,28 @@
 
 enum COLOR { RED, BLACK };
 
-class Node {
+class NodeRBT {
 public:
     int val;
     COLOR color;
-    Node *left, *right, *parent;
+    NodeRBT *left, *right, *parent;
 
-    Node(int val) : val(val) {
+    NodeRBT(int val) : val(val) {
         parent = left = right = nullptr;
         
-        // Node is created during insertion
-        // Node is red at insertion
+        // NodeRBT is created during insertion
+        // NodeRBT is red at insertion
         color = RED;
     }
 	
 
-    void printNode(){
+    void printNodeRBT(){
     	std::cout << "Value: " << this->val << " Color: " << this->color << " Parent: " << 
 		&parent << " Left Child: " << &left << " Right Child: " << &right << std::endl;
     }
 
     // returns pointer to uncle
-    Node *uncle() {
+    NodeRBT *uncle() {
         // If no parent or grandparent, then no uncle
         if (parent == nullptr || parent->parent == nullptr)
         return nullptr;
@@ -37,11 +37,11 @@ public:
 	}
     }
 
-    // check if node is left child of parent
+    // check if NodeRBT is left child of parent
     bool isOnLeft() { return this == parent->left; }
 
     // returns pointer to sibling
-    Node *sibling() {
+    NodeRBT *sibling() {
         // sibling null if no parent
         if (parent == nullptr)
         return nullptr;
@@ -51,8 +51,8 @@ public:
         return parent->left;
     }
 
-    // moves node down and moves given node in its place
-    void moveDown(Node *nParent) {
+    // moves NodeRBT down and moves given NodeRBT in its place
+    void moveDown(NodeRBT *nParent) {
         if (parent != nullptr) {
             if (isOnLeft()) {
                 parent->left = nParent;
@@ -71,14 +71,14 @@ public:
 };
 
 class RBTree {
-    Node *root;
+    NodeRBT *root;
 
-    // left rotates the given node
-    void leftRotate(Node *x) {
-        // new parent will be node's right child
-        Node *nParent = x->right;
+    // left rotates the given NodeRBT
+    void leftRotate(NodeRBT *x) {
+        // new parent will be NodeRBT's right child
+        NodeRBT *nParent = x->right;
 
-        // update root if current node is root
+        // update root if current NodeRBT is root
         if (x == root)
         root = nParent;
 
@@ -86,7 +86,7 @@ class RBTree {
 
         // connect x with new parent's left element
         x->right = nParent->left;
-        // connect new parent's left element with node
+        // connect new parent's left element with NodeRBT
         // if it is not null
         if (nParent->left != nullptr)
         nParent->left->parent = x;
@@ -95,11 +95,11 @@ class RBTree {
         nParent->left = x;
     }
 
-    void rightRotate(Node *x) {
-        // new parent will be node's left child
-        Node *nParent = x->left;
+    void rightRotate(NodeRBT *x) {
+        // new parent will be NodeRBT's left child
+        NodeRBT *nParent = x->left;
 
-        // update root if current node is root
+        // update root if current NodeRBT is root
         if (x == root)
         root = nParent;
 
@@ -107,7 +107,7 @@ class RBTree {
 
         // connect x with new parent's right element
         x->left = nParent->right;
-        // connect new parent's right element with node
+        // connect new parent's right element with NodeRBT
         // if it is not null
         if (nParent->right != nullptr)
         nParent->right->parent = x;
@@ -116,22 +116,22 @@ class RBTree {
         nParent->right = x;
     }
 
-    void swapColors(Node *x1, Node *x2) {
+    void swapColors(NodeRBT *x1, NodeRBT *x2) {
         COLOR temp;
         temp = x1->color;
         x1->color = x2->color;
         x2->color = temp;
     }
 
-    void swapValues(Node *u, Node *v) {
+    void swapValues(NodeRBT *u, NodeRBT *v) {
         int temp;
         temp = u->val;
         u->val = v->val;
         v->val = temp;
     }
 
-    // fix red red at given node
-    void fixRedRed(Node *x) {
+    // fix red red at given NodeRBT
+    void fixRedRed(NodeRBT *x) {
         // if x is root color it black and return
         if (x == root) {
             x->color = BLACK;
@@ -139,7 +139,7 @@ class RBTree {
         }
 
         // initialize parent, grandparent, uncle
-        Node *parent = x->parent, *grandparent = parent->parent,
+        NodeRBT *parent = x->parent, *grandparent = parent->parent,
         *uncle = x->uncle();
 
         if (parent->color != BLACK) {
@@ -177,10 +177,10 @@ class RBTree {
         }
     }
 
-    // find node that do not have a left child
-    // in the subtree of the given node
-    Node *successor(Node *x) {
-        Node *temp = x;
+    // find NodeRBT that do not have a left child
+    // in the subtree of the given NodeRBT
+    NodeRBT *successor(NodeRBT *x) {
+        NodeRBT *temp = x;
 
         while (temp->left != nullptr)
         temp = temp->left;
@@ -188,9 +188,9 @@ class RBTree {
         return temp;
     }
 
-    // find node that replaces a deleted node in BST
-    Node *BSTreplace(Node *x) {
-        // when node have 2 children
+    // find NodeRBT that replaces a deleted NodeRBT in BST
+    NodeRBT *BSTreplace(NodeRBT *x) {
+        // when NodeRBT have 2 children
         if (x->left != nullptr && x->right != nullptr)
         return successor(x->right);
 
@@ -206,13 +206,13 @@ class RBTree {
 	}
     }
 
-    // deletes the given node
-    void deleteNode(Node *v) {
-        Node *u = BSTreplace(v);
+    // deletes the given NodeRBT
+    void deleteNodeRBT(NodeRBT *v) {
+        NodeRBT *u = BSTreplace(v);
 
         // True when u and v are both black
         bool uvBlack = ((u == nullptr || u->color == BLACK) && (v->color == BLACK));
-        Node *parent = v->parent;
+        NodeRBT *parent = v->parent;
 
         if (u == nullptr) {
             // u is NULL therefore v is leaf
@@ -271,15 +271,15 @@ class RBTree {
 
         // v has 2 children, swap values with successor and recurse
         swapValues(u, v);
-        deleteNode(u);
+        deleteNodeRBT(u);
     }
 
-    void fixDoubleBlack(Node *x) {
+    void fixDoubleBlack(NodeRBT *x) {
         if (x == root)
         // Reached root
         return;
 
-        Node *sibling = x->sibling(), *parent = x->parent;
+        NodeRBT *sibling = x->sibling(), *parent = x->parent;
         if (sibling == nullptr) {
             // No sibiling, double black pushed up
             fixDoubleBlack(parent);
@@ -338,15 +338,15 @@ class RBTree {
         }
     }
 
-    // prints level order for given node
-    void levelOrder(Node *x) {
+    // prints level order for given NodeRBT
+    void levelOrder(NodeRBT *x) {
         if (x == NULL)
-        // return if node is null
+        // return if NodeRBT is null
         return;
 
         // queue for level order
-	std::queue<Node *> q;
-        Node *curr;
+	std::queue<NodeRBT *> q;
+        NodeRBT *curr;
 
         // push x
         q.push(x);
@@ -357,7 +357,7 @@ class RBTree {
             curr = q.front();
             q.pop();
 
-            // print node value
+            // print NodeRBT value
 	    std::cout << curr->val << " ";
 
             // push children to queue
@@ -369,7 +369,7 @@ class RBTree {
     }
 
     // prints inorder recursively
-    void inorder(Node *x) {
+    void inorder(NodeRBT *x) {
         if (x == NULL)
         return;
         inorder(x->left);
@@ -382,13 +382,13 @@ public:
     // initialize root
     RBTree() { root = NULL; }
 
-    Node *getRoot() { return root; }
+    NodeRBT *getRoot() { return root; }
 
     // searches for given value
-    // if found returns the node (used for delete)
-    // else returns the last node while traversing (used in insert)
-    Node *search(int n) {
-        Node *temp = root;
+    // if found returns the NodeRBT (used for delete)
+    // else returns the last NodeRBT while traversing (used in insert)
+    NodeRBT *search(int n) {
+        NodeRBT *temp = root;
         while (temp != NULL) {
             if (n < temp->val) {
                 if (temp->left == NULL)
@@ -410,50 +410,50 @@ public:
 
     // inserts the given value to tree
     void insert(int n) {
-        Node *newNode = new Node(n);
+        NodeRBT *newNodeRBT = new NodeRBT(n);
         if (root == NULL) {
             // when root is null
             // simply insert value at root
-            newNode->color = BLACK;
-            root = newNode;
+            newNodeRBT->color = BLACK;
+            root = newNodeRBT;
         } else {
-            Node *temp = search(n);
+            NodeRBT *temp = search(n);
 
             if (temp->val == n) {
                 // return if value already exists
                 return;
             }
 
-            // if value is not found, search returns the node
+            // if value is not found, search returns the NodeRBT
             // where the value is to be inserted
 
-            // connect new node to correct node
-            newNode->parent = temp;
+            // connect new NodeRBT to correct NodeRBT
+            newNodeRBT->parent = temp;
 
             if (n < temp->val)
-            temp->left = newNode;
+            temp->left = newNodeRBT;
             else
-            temp->right = newNode;
+            temp->right = newNodeRBT;
 
             // fix red red voilaton if exists
-            fixRedRed(newNode);
+            fixRedRed(newNodeRBT);
         }
     }
 
-    // utility function that deletes the node with given value
+    // utility function that deletes the NodeRBT with given value
     void deleteByVal(int n) {
         if (root == NULL)
         // Tree is empty
         return;
 
-        Node *v = search(n);
+        NodeRBT *v = search(n);
 
         if (v->val != n) {
-		std::cout << "No node found to delete with value:" << n << std::endl;
+		std::cout << "No NodeRBT found to delete with value:" << n << std::endl;
 		return;
         }
 
-        deleteNode(v);
+        deleteNodeRBT(v);
     }
 
     // prints inorder of the tree
@@ -477,7 +477,7 @@ public:
     }
 
     int findMax(){
-    	Node *temp = root;
+    	NodeRBT *temp = root;
 	while(temp->right != nullptr){
 		temp = temp->right;
 	}
@@ -485,7 +485,7 @@ public:
     }
 
     int findMin(){
-    	Node *temp = root;
+    	NodeRBT *temp = root;
 	while(temp->left != nullptr){
 		temp = temp->left;
 	}

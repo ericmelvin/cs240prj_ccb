@@ -1,0 +1,39 @@
+LIB_FLAGS = -lpython2.7
+INC_FLAGS = -I/usr/include/python2.7
+CXX = g++
+O_FILES = graph.o
+TARGET = graph
+
+$(TARGET):	$(LIB_FLAGS)
+			$(O_FILES)
+			$(CXX) $(INC_FLAGS) $(LIB_FLAGS) -o g
+
+LIB_FLAGS = -lpython2.7
+INC_FLAGS = -I/usr/include/python2.7
+
+---
+graph.o:	graph.cc graph.hh
+			g++ graph.cc $(INC_FLAGS) $(LIB_FLAGS) -o g
+
+---
+CXX = g++
+CXX_FLAGS = -g -Wall -std=c++17
+INC_PATH = -I/usr/include/python2.7 
+LIB_PATH = -lpython2.7
+
+O_FILES = graph.o
+
+TARGET = graph
+
+all:			$(TARGET)
+
+$(TARGET):		$(O_FILES)
+				$(CXX) $(CXX_FLAGS) $(INC_PATH) $(LIB_PATH) $(O_FILES) -o $@
+
+.phony:			clean
+clean:
+				rm -f *~ *.o $(TARGET)
+
+#dependencies
+graph.o:	matplotlibcpp.h graph.cc graph.hh
+

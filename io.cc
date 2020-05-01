@@ -4,26 +4,7 @@
 #include <vector>
 #include "io.hh"
 #include "graph.hh"
-// Main for testing only
-int main() {
 
-    makeGraph();
-    // Testing for generate input numbers
-    std::vector<int> v = genInputNumbers(100, 100000);
-    for (int i=0; i<v.size(); i++) {
-        std::cout << v[i] << std::endl;
-    }
-
-    // Testing for output table
-    std::vector<std::string> h = {"Data Structure", "Size", "buildTree()", "findMin()", "findMax()", "findK()"};
-
-    std::vector<std::vector<double>> timingData = {{1, 2, 3.1, 4.5, 5},
-                                {5.1235, 7.835, 189.383, 15.5, 1}};
-    std::vector<std::string> rowLabels = {"BST", "RBT"};
-    outputTable(timingData, h, rowLabels);
-
-    return 0;
-}
 
 // Generate a vector of random numbers for input to data structures
 // Input length: length of vector
