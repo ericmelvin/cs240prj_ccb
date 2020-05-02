@@ -24,6 +24,23 @@ void InputTest(std::ifstream &infile, char ** argv)
 	infile.seekg(0, infile.beg);
 }
 
+void TestBST(std::ifstream &infile, BST &bst)
+{
+	//Build tree
+	bst.BuildTree(infile);
+
+	//Find max
+	std::cout << "Max: " << bst.FindMax() << std::endl;
+
+	//Find min
+	std::cout << "Min: " << bst.FindMin() << std::endl;
+
+	//Search tree
+	bst.Search(17200);
+	bst.Search(6941);
+	bst.Search(321);
+}
+
 int main(int argc, char *argv[]){
 
 	// IO Testing --------------------------------------------------------------
@@ -64,12 +81,22 @@ int main(int argc, char *argv[]){
 	BST bst;
 	Node *root = bst.GetRoot();
 
+	//Time these functions
+	//------------------BST---------------------
+	//Build tree
 	bst.BuildTree(infile);
 
-	std::cout << bst.FindMax() << std::endl;
-	std::cout << bst.FindMin() << std::endl;
-	bst.Search(5);
-	bst.Search(30);
+	//Find max
+	std::cout << "Max: " << bst.FindMax() << std::endl;
 
+	//Find min
+	std::cout << "Min: " << bst.FindMin() << std::endl;
+
+	//Search tree
+	std::cout << "Search: " << std::endl;
+	bst.Search(17200);
+	bst.Search(6941);
+	bst.Search(321);
+	//------------------------------------------
 	return 0;
 }

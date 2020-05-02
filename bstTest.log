@@ -1,0 +1,49 @@
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ran_1000 1
+
+Max: 32705
+Min: 12
+Found #17200
+Not Found #6941
+Not Found #321
+
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ran_10000 1
+
+Max: 32756
+Min: 3
+Not Found #17200
+Found #6941
+Not Found #321
+
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ran_100000 1
+
+Max: 32767
+Min: 0
+Found #17200
+Found #6941
+Found #321
+
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ord_1000 1
+
+Max: 1000
+Min: 1
+Not Found #17200
+Not Found #6941
+Found #321
+
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ord_10000 1
+
+Max: 10000
+Min: 1
+Not Found #17200
+Found #6941
+Found #321
+
+ctran20@remote05:~/i240a/submit/team-prj/cs240prj_ccb$ ./proj ord_100000 1
+
+Max: 100000
+Min: 1
+Found #17200
+Found #6941
+Found #321
+
+*ord_100000 took the longest

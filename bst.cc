@@ -44,6 +44,7 @@ void BST::Insert(Node* n)
 			}//Equal
 			else {
 				dups++;
+				found = true;
 			}
 		}
 	}
@@ -260,13 +261,15 @@ bool BST::Search(int num)
 	Node* curr = root;
 	Node* parent = nullptr;
 
+	std::cout << "#" << num;
+
 	//While not at the end of list or found is false
 	while (curr != nullptr)
 	{
 		if (num == curr->data)
 		{
 			//Debug
-			std::cout << "Found #" << num << std::endl;
+			std::cout << " - Found!" << std::endl;
 			return true;
 		}
 		else if (num < curr->data)
@@ -281,7 +284,7 @@ bool BST::Search(int num)
 		}
 	}
 	//Debug
-	std::cout << "Not Found #" << num << std::endl;
+	std::cout << " - Not Found!" << std::endl;
 	return false;
 }
 
