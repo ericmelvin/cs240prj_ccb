@@ -1,7 +1,7 @@
 all: 		main
 
 main:		main.o io.o graph.o bst.o
-			g++ main.o bst.o io.o graph.o -I/usr/include/python2.7 -lpython2.7 -o proj
+			g++ -g main.o bst.o io.o graph.o -I/usr/include/python2.7 -lpython2.7 -o proj
 
 graph.o:	graph.cc graph.hh
 			g++ -c graph.cc -I/usr/include/python2.7 -lpython2.7

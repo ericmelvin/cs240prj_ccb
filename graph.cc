@@ -14,20 +14,26 @@ std::vector<int> labelSpacing(int numLabels) {
     }
     return spacing;
 }
-void makeGraph(std::vector<int> timingDataBST, std::vector<int> timingDataRBT) {
-    std::vector<std::string> labels = {"buildTree()", "findMin()", "findMax()", "search()"};
+void makeGraph(std::vector<std::string> labels, std::vector<int> timingDataBST, std::vector<int> timingDataRBT) {
 
     std::vector<int> spacing = labelSpacing(labels.size());
-    
+    timingDataBST.erase(timingDataBST.begin());
+    timingDataRBT.erase(timingDataRBT.begin());
     plt::xticks(spacing, labels);
 
     // Bar positions
-    std::vector<int> a = {0, 2, 4, 6};
-    std::vector<int> b = {1, 3, 5, 7};
+    std::vector<int> a = {0, 2, 4};
+    std::vector<int> b = {1, 3, 5};
 
+    std::vector<int> x,y;
+    plt::named_plot("Binary Search Tree", x, y);
+    plt::named_plot("Red Black Tree", x, y);
+    plt::ylabel("Time (Microseconds)");
+    plt::xlabel("Function");
     plt::bar(a, timingDataBST);
     plt::bar(b, timingDataRBT);
     
+    plt::legend();
     plt::show();
     
 }

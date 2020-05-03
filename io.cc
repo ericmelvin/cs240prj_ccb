@@ -20,8 +20,6 @@ std::vector<int> genInputNumbers(int length, int max) {
 // Return milliseconds since epoch time
 unsigned long getCurrentTime()  {
     const auto clock = std::chrono::system_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::microseconds>(
-                   clock.time_since_epoch()).count() << std::endl;
     return std::chrono::duration_cast<std::chrono::microseconds>(
                    clock.time_since_epoch()).count();
 }

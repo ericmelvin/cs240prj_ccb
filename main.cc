@@ -44,15 +44,19 @@ void TestBST(std::ifstream &infile, BST &bst)
 }
 
 int main(int argc, char *argv[]){
+
+	// IO ----------------------------------------------------------------------
+    std::vector<std::string> labels = {"findMax()", "findMin()", "search()"};
+
 	std::vector<int> timingDataBST;
 	std::vector<int> timingDataRBT;
 
 	int start = 0;
 	int end = 0;
 
-    // output table labels
-    std::vector<std::string> h = {"Data Structure", "Size", "buildTree()", "findMin()", "findMax()", "search()"};
-    std::vector<std::string> rowLabels = {"BST", "RBT"};
+    std::vector<std::string> colLabels = {"Data Structure", "buildTree()", "findMax()", "findMin()", "search()"};
+    
+	std::vector<std::string> rowLabels = {"BST", "RBT"};
 
 	// -------------------------------------------------------------------------
 	//Test if input is correct
@@ -79,7 +83,7 @@ int main(int argc, char *argv[]){
 
 	//Time these functions
 	
-	//------------------BST---------------------
+	// BST ---------------------------------------------------------------------
 	//Build tree
 	start = getCurrentTime();
 	bst.BuildTree(infile);
@@ -100,15 +104,21 @@ int main(int argc, char *argv[]){
 
 	//Search tree
 	start = getCurrentTime();
-	std::cout << "Search: " << std::endl;
 	bst.Search(17200);
 	end = getCurrentTime();
 	timingDataBST.push_back(end-start);
 
-	//------------------------------------------
+	// RBT ---------------------------------------------------------------------
+
+	// Reset input file
+	infile.clear();
+	infile.seekg(0, infile.beg);
+	
 	RBTree rbt;
+
 	int x = 0;
-	//time
+	
+	// Build RBT
 	start = getCurrentTime();
 	while(infile >> x){
 		rbt.insert(x);
@@ -116,39 +126,29 @@ int main(int argc, char *argv[]){
 	end = getCurrentTime();
 	timingDataRBT.push_back(end-start);
 
-	//time 
+	// findMax RBT
 	start = getCurrentTime();
-	//std::cout << "Max: " << rbt.findMax() << std::endl;
+	std::cout << "Max: " << rbt.findMax() << std::endl;
 	end = getCurrentTime();
 	timingDataRBT.push_back(end-start);
 
-	//time
+	// findMin RBT
 	start = getCurrentTime();
-	//std::cout << "Min: " << rbt.findMin() << std::endl;
+	std::cout << "Min: " << rbt.findMin() << std::endl;
 	end = getCurrentTime();
 	timingDataRBT.push_back(end-start);
 
-	//time
+	// Search RBT
 	start = getCurrentTime();
-	//NodeRBT *n = rbt.search(1);
+	NodeRBT *n = rbt.search(1);
 	end = getCurrentTime();
 	timingDataRBT.push_back(end-start);
-	std::cout << "Search for [num] --> ";
-	//n->printNodeRBT();
 
-	for (int i =0; i<timingDataBST.size(); i++) {
-		std::cout << timingDataBST[i] << std::endl;
-	}
-	std::vector<int> test1, test2;
-    for(int i=0; i<4; i++) {
-        test1.push_back(i);
-        test2.push_back(i*2);
-    }
-	makeGraph(test1, test2);
+	makeGraph(labels, timingDataBST, timingDataRBT);
 	
 	std::vector<std::vector<int>> tableData;
-	tableData.push_back(timingDataRBT);
 	tableData.push_back(timingDataBST);
-	outputTable(tableData, h, rowLabels);
+	tableData.push_back(timingDataRBT);
+	outputTable(tableData, colLabels, rowLabels);
 	return 0;
 }
