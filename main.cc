@@ -26,23 +26,6 @@ void InputTest(std::ifstream &infile, char ** argv)
 	infile.seekg(0, infile.beg);
 }
 
-void TestBST(std::ifstream &infile, BST &bst)
-{
-	//Build tree
-	bst.BuildTree(infile);
-
-	//Find max
-	std::cout << "Max: " << bst.FindMax() << std::endl;
-
-	//Find min
-	std::cout << "Min: " << bst.FindMin() << std::endl;
-
-	//Search tree
-	bst.Search(17200);
-	bst.Search(6941);
-	bst.Search(321);
-}
-
 int main(int argc, char *argv[]){
 
 	// IO ----------------------------------------------------------------------
@@ -60,15 +43,15 @@ int main(int argc, char *argv[]){
 
 	// -------------------------------------------------------------------------
 	//Test if input is correct
-	if (argc < 3) {
+	if (argc < 2) {
 		std::cerr << "usage: " << argv[0]
-			<< " INPUT_FILE FUNCTIONS " << std::endl
-			<< "FUNCTIONS: - SEARCH n" << std::endl
-			<< "           - INSERT n" << std::endl
-			<< "           - REMOVE n" << std::endl
-			<< "           - FINDMIN" << std::endl
-			<< "           - FINDMAX" << std::endl
-		    << "           - FINDMINMAX" << std::endl;
+			<< " INPUT_FILE " << std::endl;
+			//<< "FUNCTIONS: - SEARCH n" << std::endl
+			//<< "           - INSERT n" << std::endl
+			//<< "           - REMOVE n" << std::endl
+			//<< "           - FINDMIN" << std::endl
+			//<< "           - FINDMAX" << std::endl
+		 //   << "           - FINDMINMAX" << std::endl;
 		std::exit(1);
 	}
 
@@ -80,10 +63,10 @@ int main(int argc, char *argv[]){
 
 	BST bst;
 	Node *root = bst.GetRoot();
-
-	//Time these functions
 	
 	// BST ---------------------------------------------------------------------
+	std::cout << "--------BST---------" << std::endl;
+
 	//Build tree
 	start = getCurrentTime();
 	bst.BuildTree(infile);
@@ -104,12 +87,14 @@ int main(int argc, char *argv[]){
 
 	//Search tree
 	start = getCurrentTime();
-	bst.Search(17200);
+	bst.Search(3457);
 	end = getCurrentTime();
 	timingDataBST.push_back(end-start);
 
-	// RBT ---------------------------------------------------------------------
+	std::cout << std::endl;
 
+	// RBT ---------------------------------------------------------------------
+	std::cout << "--------RBT---------" << std::endl;
 	// Reset input file
 	infile.clear();
 	infile.seekg(0, infile.beg);
@@ -140,9 +125,11 @@ int main(int argc, char *argv[]){
 
 	// Search RBT
 	start = getCurrentTime();
-	NodeRBT *n = rbt.search(1);
+	NodeRBT *n = rbt.search(3457);
 	end = getCurrentTime();
 	timingDataRBT.push_back(end-start);
+
+	std::cout << std::endl;
 
 	makeGraph(labels, timingDataBST, timingDataRBT);
 	
