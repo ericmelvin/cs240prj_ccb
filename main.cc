@@ -98,5 +98,24 @@ int main(int argc, char *argv[]){
 	bst.Search(6941);
 	bst.Search(321);
 	//------------------------------------------
+	RBTree rbt;
+	int x = 0;
+	//time
+	while(infile >> x){
+		rbt.insert(x);
+	}
+	
+	//time 
+	std::cout << "Max: " << rbt.findMax() << std::endl;
+
+	//time
+	std::cout << "Min: " << rbt.findMin() << std::endl;
+
+	//time
+	NodeRBT *n = rbt.search(1);
+	std::cout << "Search for [num] --> ";
+	n->printNodeRBT();
+
+
 	return 0;
 }
