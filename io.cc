@@ -20,13 +20,15 @@ std::vector<int> genInputNumbers(int length, int max) {
 // Return milliseconds since epoch time
 unsigned long getCurrentTime()  {
     const auto clock = std::chrono::system_clock::now();
-    return std::chrono::duration_cast<std::chrono::milliseconds>(
+    std::cout << std::chrono::duration_cast<std::chrono::microseconds>(
+                   clock.time_since_epoch()).count() << std::endl;
+    return std::chrono::duration_cast<std::chrono::microseconds>(
                    clock.time_since_epoch()).count();
 }
 
 // Ouput table functions -------------------------------------------------------
 // Ouput full table
-void outputTable(std::vector<std::vector<double>> timingData, std::vector<std::string> colLabels, std::vector<std::string> rowLabels) {
+void outputTable(std::vector<std::vector<int>> timingData, std::vector<std::string> colLabels, std::vector<std::string> rowLabels) {
     int precision = 10;
     outputColLabels(colLabels);
     for (int i=0; i<rowLabels.size(); i++) {

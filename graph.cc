@@ -14,21 +14,19 @@ std::vector<int> labelSpacing(int numLabels) {
     }
     return spacing;
 }
-void makeGraph() {
-    std::vector<std::string> labels = {"findMin()", "findMax()", "search()", "insert()"};
+void makeGraph(std::vector<int> timingDataBST, std::vector<int> timingDataRBT) {
+    std::vector<std::string> labels = {"buildTree()", "findMin()", "findMax()", "search()"};
 
     std::vector<int> spacing = labelSpacing(labels.size());
     
-    std::vector<int> test_data, test_data2;
-    for (int i = 1; i < 5; i++) {
-        test_data.push_back(i);
-        test_data2.push_back(i+i);
-    }
     plt::xticks(spacing, labels);
+
+    // Bar positions
     std::vector<int> a = {0, 2, 4, 6};
     std::vector<int> b = {1, 3, 5, 7};
-    plt::bar(a, test_data);
-    plt::bar(b, test_data2);
+
+    plt::bar(a, timingDataBST);
+    plt::bar(b, timingDataRBT);
     
     plt::show();
     

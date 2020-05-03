@@ -6,6 +6,8 @@
 #include "io.hh"
 #include "matplotlibcpp.h"
 #include "graph.hh"
+#include <vector>
+
 //Test if input valid
 void InputTest(std::ifstream &infile, char ** argv)
 {
@@ -42,22 +44,16 @@ void TestBST(std::ifstream &infile, BST &bst)
 }
 
 int main(int argc, char *argv[]){
+	std::vector<int> timingDataBST;
+	std::vector<int> timingDataRBT;
 
-	// IO Testing --------------------------------------------------------------
-	makeGraph();
-    // Testing for generate input numbers
-    std::vector<int> v = genInputNumbers(100, 100000);
-    for (int i=0; i<v.size(); i++) {
-        std::cout << v[i] << std::endl;
-    }
+	int start = 0;
+	int end = 0;
 
-    // Testing for output table
-    std::vector<std::string> h = {"Data Structure", "Size", "buildTree()", "findMin()", "findMax()", "findK()"};
-
-    std::vector<std::vector<double>> timingData = {{1, 2, 3.1, 4.5, 5},
-                                {5.1235, 7.835, 189.383, 15.5, 1}};
+    // output table labels
+    std::vector<std::string> h = {"Data Structure", "Size", "buildTree()", "findMin()", "findMax()", "search()"};
     std::vector<std::string> rowLabels = {"BST", "RBT"};
-    outputTable(timingData, h, rowLabels);
+
 	// -------------------------------------------------------------------------
 	//Test if input is correct
 	if (argc < 3) {
@@ -82,40 +78,77 @@ int main(int argc, char *argv[]){
 	Node *root = bst.GetRoot();
 
 	//Time these functions
+	
 	//------------------BST---------------------
 	//Build tree
+	start = getCurrentTime();
 	bst.BuildTree(infile);
+	end = getCurrentTime();
+	timingDataBST.push_back(end-start);
 
 	//Find max
+	start = getCurrentTime();
 	std::cout << "Max: " << bst.FindMax() << std::endl;
+	end = getCurrentTime();
+	timingDataBST.push_back(end-start);
 
 	//Find min
+	start = getCurrentTime();
 	std::cout << "Min: " << bst.FindMin() << std::endl;
+	end = getCurrentTime();
+	timingDataBST.push_back(end-start);
 
 	//Search tree
+	start = getCurrentTime();
 	std::cout << "Search: " << std::endl;
 	bst.Search(17200);
-	bst.Search(6941);
-	bst.Search(321);
+	end = getCurrentTime();
+	timingDataBST.push_back(end-start);
+
 	//------------------------------------------
 	RBTree rbt;
 	int x = 0;
 	//time
+	start = getCurrentTime();
 	while(infile >> x){
 		rbt.insert(x);
 	}
-	
+	end = getCurrentTime();
+	timingDataRBT.push_back(end-start);
+
 	//time 
-	std::cout << "Max: " << rbt.findMax() << std::endl;
+	start = getCurrentTime();
+	//std::cout << "Max: " << rbt.findMax() << std::endl;
+	end = getCurrentTime();
+	timingDataRBT.push_back(end-start);
 
 	//time
-	std::cout << "Min: " << rbt.findMin() << std::endl;
+	start = getCurrentTime();
+	//std::cout << "Min: " << rbt.findMin() << std::endl;
+	end = getCurrentTime();
+	timingDataRBT.push_back(end-start);
 
 	//time
-	NodeRBT *n = rbt.search(1);
+	start = getCurrentTime();
+	//NodeRBT *n = rbt.search(1);
+	end = getCurrentTime();
+	timingDataRBT.push_back(end-start);
 	std::cout << "Search for [num] --> ";
-	n->printNodeRBT();
+	//n->printNodeRBT();
 
-
+	for (int i =0; i<timingDataBST.size(); i++) {
+		std::cout << timingDataBST[i] << std::endl;
+	}
+	std::vector<int> test1, test2;
+    for(int i=0; i<4; i++) {
+        test1.push_back(i);
+        test2.push_back(i*2);
+    }
+	makeGraph(test1, test2);
+	
+	std::vector<std::vector<int>> tableData;
+	tableData.push_back(timingDataRBT);
+	tableData.push_back(timingDataBST);
+	outputTable(tableData, h, rowLabels);
 	return 0;
 }
