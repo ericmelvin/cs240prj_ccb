@@ -150,7 +150,7 @@ n = seconds to run function
 1. Running the program with an input of **10000 integers** in ascending order (./proj ord_1000000)
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()     |  
------------------|----------------|----------------|----------------|--------------|
+|----------------|----------------|----------------|----------------|--------------|
 | BST            | 291434         | 63             | 3              | 15           | 
 | RBT            | 4562           | 30             | 3              | 1            |
 [<img src="ord_10000.png" height="300">](ord_10000.png)
@@ -158,7 +158,7 @@ n = seconds to run function
 1. Running the program with an input of **100000 integers** in **ascending order** (./proj ord_100000)
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
------------------|----------------|----------------|----------------|----------------|
+|----------------|----------------|----------------|----------------|----------------|
 | BST            | 24376269       | 461            | 44             | 25             |
 | RBT            | 68430          | 84             | 16             | 2              |
 
@@ -167,7 +167,7 @@ n = seconds to run function
 1. Running the program with an input of **10000 integers** in **random order** (./proj ran_10000)
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
------------------|----------------|----------------|----------------|----------------|
+|----------------|----------------|----------------|----------------|----------------|
 | BST            | 4671           | 141            | 11             | 8              |
 | RBT            | 5327           | 37             | 8              | 0              |
 
@@ -177,7 +177,7 @@ n = seconds to run function
 1. Running the program with an input of **100000 integers** in **random order** (./proj ran_100000)
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
------------------|----------------|----------------|----------------|----------------|
+|----------------|----------------|----------------|----------------|----------------|
 | BST            | 68106          | 37             | 3              | 3              |
 | RBT            | 95496          | 52             | 7              | 1              |
 
