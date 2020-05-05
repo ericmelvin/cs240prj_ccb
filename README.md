@@ -138,7 +138,7 @@ n = seconds to run function
 |Max| O(lg n) | O(lg n) |
 |Min| O(lg n) | O(lg n) | 
 
-- Red-Black Trees are garunteed to be balanced with O(lg n) height for n elements. [Proof on Height of RBT](http://www.dgp.toronto.edu/~jstewart/378notes/16redBlack/)
+- Red-Black Trees are guaranteed to be balanced with O(lg n) height for n elements. [Proof on Height of RBT](http://www.dgp.toronto.edu/~jstewart/378notes/16redBlack/)
 - RBTs only require a single bit to maintain the coloring of the tree so the amount of space it takes is almost the same as the BST.
 - Recoloring the RBT for inserts and deletions is O(1) since it only involves changing the color bit.
 - Rebalancing the tree involves switching around some pointers depending on the color of the node and the color of surrounding nodes. To fix any violations that occur from inserting or deleting, restoring the tree is O(lg n) because the whole tree may need to be restructured to abide by the restrictions of a RBT.
