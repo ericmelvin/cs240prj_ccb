@@ -151,16 +151,17 @@ n = seconds to run function
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()     |  
 |----------------|----------------|----------------|----------------|--------------|
-| BST            | 291434         | 63             | 3              | 15           | 
-| RBT            | 4562           | 30             | 3              | 1            |
+| BST            | 291,434        | 63             | 3              | 15           | 
+| RBT            | 4,562          | 30             | 3              | 1            |
+
 [<img src="ord_10000.png" height="300">](ord_10000.png)
 
 1. Running the program with an input of **100000 integers** in **ascending order** (./proj ord_100000)
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
 |----------------|----------------|----------------|----------------|----------------|
-| BST            | 24376269       | 461            | 44             | 25             |
-| RBT            | 68430          | 84             | 16             | 2              |
+| BST            | 24,376,269     | 461            | 44             | 25             |
+| RBT            | 68,430         | 84             | 16             | 2              |
 
 [<img src="ord_100000.png" height="300">](ord_100000.png)
 
@@ -168,8 +169,8 @@ n = seconds to run function
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
 |----------------|----------------|----------------|----------------|----------------|
-| BST            | 4671           | 141            | 11             | 8              |
-| RBT            | 5327           | 37             | 8              | 0              |
+| BST            | 4,671          | 141            | 11             | 8              |
+| RBT            | 5,327          | 37             | 8              | 0              |
 
 [<img src="ran_10000.png" height="300">](ran_10000.png)
 
@@ -178,8 +179,8 @@ n = seconds to run function
 
 | Data Structure | buildTree()    | findMax()      | findMin()      | search()       |
 |----------------|----------------|----------------|----------------|----------------|
-| BST            | 68106          | 37             | 3              | 3              |
-| RBT            | 95496          | 52             | 7              | 1              |
+| BST            | 68,106         | 37             | 3              | 3              |
+| RBT            | 95,496         | 52             | 7              | 1              |
 
 [<img src="ran_100000.png" height="300">](ran_100000.png)
 
